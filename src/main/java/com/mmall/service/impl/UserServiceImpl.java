@@ -148,6 +148,7 @@ public class UserServiceImpl implements IUserService {
 
     public ServerResponse<String> resetPassword(String passwordOld,String passwordNew,User user){                                          //防止横向越权，要检验一下这个用户的旧密码，一定要指定这个用户，因为会查询一个count(1),如果不指定id，那么结果就是true，count肯定>0
         //而当count>0时，就意味着可以直接修改密码了，如果不这样，那么我只要蒙对一个在数据库中存在的密码，我就可以直接修改密码了
+        //防止横向越权
         int resultCount =userMapper.checkPassword(MD5Util.MD5EncodeUtf8(passwordOld),user.getId());
         if(resultCount==0){
             return ServerResponse.createByErrorMessage("旧密码错误");

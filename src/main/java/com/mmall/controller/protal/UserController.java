@@ -30,7 +30,9 @@ public class UserController {
      * @param session
      * @return
      */
-    /**
+    /**当涉及到数据库增删查改是根据数据库主键进行的时候，就要充分考虑到横向越权问题
+     * 所以要有userId的存在进行检验
+     * 判断所需要操作的信息是否属于对应的用户
      * 在使用 @RequestMapping 后，返回值通常解析为跳转路径，加上 @Responsebody 后返回结果不会被解析为跳转路径，而是直接写入HTTP     响应正文中。例如，异步获取 json 数据，加上 @Responsebody 注解后，就会直接返回 json 数据。
      * @RequestBody 注解则是将 HTTP 请求正文插入方法中，使用适合的 HttpMessageConverter 将请求体写入某个对象。
      */
