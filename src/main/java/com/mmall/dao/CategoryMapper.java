@@ -18,5 +18,5 @@ public interface CategoryMapper {
     int updateByPrimaryKey(Category record);
 
     //可以用于一开始的分类查询，因为默认值就是0
-     List<Category> selectCategoryChildrenByParentId(Integer id);
+     List<Category> selectCategoryChildrenByParentId(Integer parentId);
 }

@@ -25,6 +25,7 @@
 
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
         <property name="driverClassName" value="${db.driverClassName}"/>
         <property name="url" value="${db.url}"/>
         <property name="username" value="${db.username}"/>
@@ -40,12 +41,12 @@
         <!-- 最大建立连接等待时间。如果超过此时间将接到异常。设为－1表示无限制 -->
         <property name="maxWait" value="${db.maxWait}"/>
         <!--#给出一条简单的sql语句进行验证 -->
-         <!--<property name="validationQuery" value="select getdate()" />-->
+        <!--<property name="validationQuery" value="select getdate()" />-->
         <property name="defaultAutoCommit" value="${db.defaultAutoCommit}"/>
         <!-- 回收被遗弃的（一般是忘了释放的）数据库连接到连接池中 -->
-         <!--<property name="removeAbandoned" value="true" />-->
+        <!--<property name="removeAbandoned" value="true" />-->
         <!-- 数据库连接过多长时间不用将被视为被遗弃而收回连接池中 -->
-         <!--<property name="removeAbandonedTimeout" value="120" />-->
+        <!--<property name="removeAbandonedTimeout" value="120" />-->
         <!-- #连接的超时时间，默认为半小时。 -->
         <property name="minEvictableIdleTimeMillis" value="${db.minEvictableIdleTimeMillis}"/>
 
@@ -59,8 +60,8 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!-- 对mapper.xml文件的配置扫描-->
-        <property name="mapperLocations" value="classpath*:mappers/*Mapper.xml"></property>
+        <!--“classpath*”代表的是当target文件夹下存在多个“classes”文件夹时，同时使用多个，而“classpath”代表的是当“target”文件夹下存在多个“classes”文件夹时，默认只使用第一个，这样采用“classpath”才能真正解决上述问题。-->
+        <property name="mapperLocations" value="classpath:mappers/*Mapper.xml"></property>
 
         <!-- 分页插件 -->
         <property name="plugins">
@@ -77,8 +78,6 @@
 
     </bean>
 
-    <!--Mybatis的Mapper文件识别-->
-    <!--  扫描Mapper，并将其生命周期纳入Spring的管理 -->
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mmall.dao"/>
     </bean>

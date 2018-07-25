@@ -175,7 +175,7 @@
     and password = #{password}
 
   </select>
-  <select id="selectQuestionByUsername" resultType="String" parameterType="string">
+  <select id="selectQuestionByUsername" resultType="java.lang.String" parameterType="string">
     SELECT
     question
     FROM mmall_user
