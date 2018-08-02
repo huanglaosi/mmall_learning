@@ -8,8 +8,13 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!--等同于扫描了Controller层-->
-    <context:component-scan base-package="com.mmall" annotation-config="true"/>
+    <!--《——SpringMVC的配置文件——》  -->
+
+    <!--等同于扫描了Controller层 use-default-filters="false"关闭默认扫描-->
+    <context:component-scan base-package="com.mmall.controller" annotation-config="true" use-default-filters="false">
+        <!--白名单，只扫描Controller-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--因为这个项目是属于前后端分离的，所以并不用配置视图定位-->
 
@@ -51,6 +56,16 @@
         <property name="maxInMemorySize" value="4096" />
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <!--定义在这里的，所有的都会拦截-->
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <!--<mvc:exclude-mapping path="/manage/user/login.do"/>-->
+            <bean class="com.mmall.controller.common.interceptor.Authorityinteceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>

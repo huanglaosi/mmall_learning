@@ -65,7 +65,14 @@
       </if>
 
     </select>
-
+    <select id="selectStockByProductId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+      SELECT
+      stock
+      FROM mmall_product
+      where id = #{id}
+      for update
+    </select>
+  <!--保证一致性-->
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_product
